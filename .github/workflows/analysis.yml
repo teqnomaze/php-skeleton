@@ -12,17 +12,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Configure PHP 7.3
+      - name: Setup PHP
         uses: shivammathur/setup-php@v2
-        env:
-          runner: self-hosted
         with:
           php-version: '7.3'
 
       - name: Checkout code
         uses: actions/checkout@v2
-        env:
-          runner: self-hosted
 
       - name: Validate composer.json and composer.lock
         run: composer validate --strict
