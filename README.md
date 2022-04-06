@@ -1,31 +1,25 @@
 # PHP Skeleton
-A template for kick-starting the development of a standards-compliant PHP library with all the development tools.
-
-### Requirements
-Following are the required dependencies:
-
-- [Composer](https://getcomposer.org)
-- [Xdebug](https://xdebug.org)
+A template for kick-starting the development of a standards-compliant PHP library.
 
 ### Quick Start
-Create your project from this template repository by clicking on `Use this template` button or download this repository, change the name to your project.
+Create your project from this template repository by clicking on `Use this template` button or download this repository and change the name to your project's name.
 
 ### Summary
-This publication describes a standard filesystem skeleton suitable for all PHP packages and MUST use these names for the root-level files and directories:
+This publication use these names for the root-level files and directories:
 
-|  |  |
+| Description                                     | Directory / File           |
 | ----------------------------------------------- | -------------------------- |
-| command-line executables                        | `bin/`                     |
-| configuration files                             | `config/`                  |
-| documentation files                             | `docs/`                    |
-| web server files                                | `public/`                  |
-| other resource files                            | `resources/`               |
-| PHP source code                                 | `src/`                     |
-| test code                                       | `tests/`                   |
-| a log of changes between releases               | `CHANGELOG(.*)`            |
-| guidelines for contributors                     | `CONTRIBUTING(.*)`         |
-| licensing information                           | `LICENSE(.*)`              |
-| information about the package itself            | `README(.*)`               |
+| Command-line executables                        | `/bin/`                    |
+| Configuration files                             | `/config/`                 |
+| Documentation files                             | `/docs/`                   |
+| Public HTML, JS and CSS files                   | `/public/`                 |
+| Other resource / library files                  | `/lib/`                    |
+| PHP source code                                 | `/src/`                    |
+| Test code                                       | `/tests/`                  |
+| A log of changes between releases               | `CHANGELOG(.*)`            |
+| Guidelines for contributors                     | `CONTRIBUTING(.*)`         |
+| Licensing information                           | `LICENSE(.*)`              |
+| Information about the package itself            | `README(.*)`               |
 
 ### Environment Setup
 Clone or fork the repository in your local and run the following command.
@@ -39,10 +33,10 @@ $ composer update
 ### Available CLI Commands
 CLI commands tailored for this app development :
 
-- `composer phpcs` : Run [CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer) analysis to ensures your code remains clean and consistent.
-- `composer phpstan` : Run [PHPStan](https://github.com/phpstan/phpstan) analysis to ensures your code remains error and bug free.
-- `composer phpunit` : Run [PHPUnit](https://github.com/sebastianbergmann/phpunit) testing to ensures your source codes are tested.
-- `composer coverage` : Run [Code-Coverage](https://github.com/richardregeer/phpunit-coverage-check) using the clover report of phpunit.
+- `composer phpcs` : Run [CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer) analysis to ensure all source codes remains clean and consistent.
+- `composer phpstan` : Run [PHPStan](https://github.com/phpstan/phpstan) analysis to ensure all source codes remains error and bug free.
+- `composer phpunit` : Run [PHPUnit](https://github.com/sebastianbergmann/phpunit) testing to ensure all source codes were tested before production.
+- `composer coverage` : Run [Code-Coverage](https://github.com/richardregeer/phpunit-coverage-check) to ensure unit-testing coverd all lines.
 
 ### Changelog
 
