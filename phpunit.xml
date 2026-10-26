@@ -1,28 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	colors="true"
-	stopOnFailure="false"
-	bootstrap="./vendor/autoload.php"
-	xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd"
-	cacheResult ="false"
->
-	<coverage>
-		<include>
-			<directory suffix=".php">./src</directory>
-		</include>
-		<report>
-			<clover outputFile="./results/clover.xml"/>
-			<crap4j outputFile="./results/crap4j.xml"/>
-			<html outputDirectory="./results/coverage"/>
-		</report>
-	</coverage>
-	<logging>
-		<junit outputFile="./results/phpunit.xml"/>
-	</logging>
-	<testsuites>
-		<testsuite name="app">
-			<directory suffix=".php">./tests</directory>
-		</testsuite>
-	</testsuites>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+    bootstrap="vendor/autoload.php"
+    cacheDirectory=".phpunit.cache"
+    colors="true"
+    failOnRisky="true"
+    failOnWarning="true"
+    beStrictAboutOutputDuringTests="true">
+    <testsuites>
+        <testsuite name="default">
+            <directory>tests</directory>
+        </testsuite>
+    </testsuites>
+
+    <coverage>
+        <report>
+            <clover outputFile="build/clover.xml" />
+            <crap4j outputFile="build/crap4j.xml" />
+            <html outputDirectory="build/coverage" />
+        </report>
+    </coverage>
+
+    <logging>
+        <junit outputFile="build/phpunit.xml" />
+    </logging>
+
+    <source>
+        <include>
+            <directory>src</directory>
+        </include>
+    </source>
 </phpunit>

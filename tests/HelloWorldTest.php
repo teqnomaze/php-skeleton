@@ -1,12 +1,8 @@
 <?php
-/**
- * The HelloWorldTest class file.
- *
- * @package    Skeleton
- * @subpackage Test
- */
 
-namespace Teqnomaze\Skeleton\Test;
+declare(strict_types=1);
+
+namespace Teqnomaze\Skeleton\Tests;
 
 /**
  * The HelloWorldTest class.

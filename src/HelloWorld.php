@@ -1,9 +1,6 @@
 <?php
-/**
- * The HelloWorld class file.
- *
- * @package Skeleton
- */
+
+declare(strict_types=1);
 
 namespace Teqnomaze\Skeleton;
 

@@ -1,99 +1,94 @@
 <?xml version="1.0"?>
-<ruleset namespace="Teqnomaze" name="Skeleton">
+<ruleset name="Teqnomaze"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="vendor/squizlabs/php_codesniffer/phpcs.xsd">
 
-	<!-- Iclude the file patterns. -->
-	<file>src</file>
+    <description>Coding standards for generic PHP libraries (PSR-12).</description>
+
+    <!-- Source files. -->
+    <file>src</file>
     <file>tests</file>
 
-	<!-- Exclude the file patterns. -->
-	<exclude-pattern>*/vendor/*</exclude-pattern>
+    <!-- Exclude generated and third-party code. -->
+    <exclude-pattern>*/vendor/*</exclude-pattern>
+    <exclude-pattern>*/build/*</exclude-pattern>
 
-    <!-- Arguments -->
-    <arg name="basepath" value="."/>
-    <arg value="wp"/>
-    <arg name="colors"/>
+    <!-- Only PHP files. -->
+    <arg name="extensions" value="php" />
 
-    <!-- Sets the memory limit. -->
-    <ini name="memory_limit" value="512M"/>
+    <!-- Show sniff codes, progress, and colors. -->
+    <arg value="sp" />
+    <arg name="colors" />
 
-    <!-- Rulesets -->
-    <rule ref="PSR2"/>
+    <!-- Use all CPU cores. -->
+    <arg name="parallel" value="8" />
 
+    <!-- Base standard. -->
+    <rule ref="PSR12" />
+
+    <!-- PHP conventions. -->
+    <rule ref="Generic.PHP.RequireStrictTypes" />
+    <rule ref="Generic.Arrays.DisallowLongArraySyntax" />
+    <rule ref="Generic.PHP.DeprecatedFunctions" />
+
+    <!-- Code analysis. -->
+    <rule ref="Generic.CodeAnalysis.EmptyStatement" />
+    <rule ref="Generic.CodeAnalysis.UnconditionalIfStatement" />
+    <rule ref="Generic.CodeAnalysis.UnusedFunctionParameter">
+        <exclude-pattern>*/tests/*</exclude-pattern>
+    </rule>
+
+    <!-- Structure and formatting. -->
+    <rule ref="Generic.Files.OneObjectStructurePerFile" />
+    <rule ref="Generic.ControlStructures.DisallowYodaConditions" />
+    <rule ref="Generic.Formatting.SpaceAfterCast" />
+
+    <!-- Comments. -->
+    <rule ref="Generic.Commenting.Todo" />
+
+    <!-- Naming conventions. -->
+    <rule ref="Squiz.NamingConventions.ValidVariableName">
+        <exclude name="Squiz.NamingConventions.ValidVariableName.PrivateNoUnderscore" />
+    </rule>
+
+    <!-- Comment policy. -->
     <rule ref="Squiz.Commenting">
+        <exclude name="Squiz.Commenting.FileComment" />
+        <exclude name="Squiz.Commenting.VariableComment.IncorrectVarType" />
+        <exclude name="Squiz.Commenting.FunctionComment.IncorrectParamVarName" />
+        <exclude name="Squiz.Commenting.FunctionComment.InvalidReturn" />
+        <exclude name="Squiz.Commenting.ClosingDeclarationComment" />
+        <exclude name="Squiz.Commenting.LongConditionClosingComment" />
+        <exclude name="Squiz.Commenting.PostStatementComment" />
+    </rule>
 
-		<!-- Allow indicating @since, @package, @subpackage etc in class comments -->
-		<exclude name="Squiz.Commenting.ClassComment.TagNotAllowed"/>
+    <!-- Forbidden or discouraged functions. -->
+    <rule ref="Generic.PHP.ForbiddenFunctions">
+        <properties>
+            <property name="forbiddenFunctions" type="array">
+                <element key="sizeof" value="count" />
+                <element key="var_dump" value="null" />
+                <element key="print_r" value="null" />
+                <element key="dump" value="null" />
+                <element key="dd" value="null" />
+            </property>
+        </properties>
+    </rule>
 
-		<!-- Doesn't require //end ... for classes and functions -->
-		<exclude name="Squiz.Commenting.ClosingDeclarationComment.Missing"/>
+    <!-- Warn at 120 characters; report an error beyond 150. -->
+    <rule ref="Generic.Files.LineLength">
+        <properties>
+            <property name="lineLimit" value="120" />
+            <property name="absoluteLineLimit" value="150" />
+        </properties>
+    </rule>
 
-		<!-- Excluded to allow param documentation for arrays  -->
-		<exclude name="Squiz.Commenting.DocCommentAlignment.SpaceAfterStar"/>
+    <!-- Disallow underscore prefixes on methods and properties. -->
+    <rule ref="PSR2.Methods.MethodDeclaration.Underscore">
+        <type>error</type>
+    </rule>
 
-		<!-- Doesn't require a @author value for Squiz -->
-		<exclude name="Squiz.Commenting.FileComment.IncorrectAuthor"/>
-
-		<!-- Doesn't require a @copyright value for Squiz -->
-		<exclude name="Squiz.Commenting.FileComment.IncorrectCopyright"/>
-
-		<!-- Doesn't require @author tags -->
-		<exclude name="Squiz.Commenting.FileComment.MissingAuthorTag"/>
-
-		<!-- Doesn't require @subpackage tags -->
-		<exclude name="Squiz.Commenting.FileComment.MissingSubpackageTag"/>
-
-		<!-- Doesn't require @copyright tags -->
-		<exclude name="Squiz.Commenting.FileComment.MissingCopyrightTag"/>
-
-		<!-- Excluded to allow param documentation for arrays  -->
-		<exclude name="Squiz.Commenting.FunctionComment.ParamCommentNotCapital"/>
-		<exclude name="Squiz.Commenting.FunctionComment.SpacingAfterParamName"/>
-
-		<!-- Exclude to allow duplicate hooks to be documented -->
-		<exclude name="Squiz.Commenting.InlineComment.DocBlock"/>
-
-		<!-- Excluded to allow /* translators: ... */ comments -->
-		<exclude name="Squiz.Commenting.InlineComment.NotCapital"/>
-
-		<!-- Not in Inline Docs standard, and a code smell -->
-		<exclude name="Squiz.Commenting.LongConditionClosingComment"/>
-
-		<!-- Not in Inline Docs standard, and needed to bypass WPCS checks -->
-		<exclude name="Squiz.Commenting.PostStatementComment"/>
-
-        <!-- Prefers int and bool instead of integer and boolean -->
-		<exclude name="Squiz.Commenting.FunctionComment.InvalidReturn"/>
-        <exclude name="Squiz.Commenting.FunctionComment.InvalidReturnNotVoid"/>
-        <exclude name="Squiz.Commenting.FunctionComment.IncorrectParamVarName"/>
-        <exclude name="Squiz.Commenting.VariableComment.IncorrectVarType"/>
-
-	</rule>
-
-    <!--Individual rules-->
-    <rule ref="Generic.Classes.DuplicateClassName"/>
-    <rule ref="Generic.CodeAnalysis.EmptyStatement"/>
-    <rule ref="Generic.Arrays.DisallowLongArraySyntax"/>
-    <rule ref="Generic.CodeAnalysis.UnconditionalIfStatement"/>
-    <rule ref="Generic.CodeAnalysis.UnnecessaryFinalModifier"/>
-    <rule ref="Generic.CodeAnalysis.UselessOverridingMethod"/>
-    <rule ref="Generic.Commenting.Fixme"/>
-    <rule ref="Generic.Commenting.DocComment"/>
-    <rule ref="Generic.Formatting.NoSpaceAfterCast"/>
-    <rule ref="Squiz.Arrays.ArrayBracketSpacing"/>
-    <rule ref="Squiz.ControlStructures.ElseIfDeclaration"/>
-    <rule ref="Squiz.Strings.DoubleQuoteUsage"/>
-    <rule ref="Squiz.Strings.DoubleQuoteUsage.ContainsVar"/>
-    <rule ref="Squiz.WhiteSpace.ControlStructureSpacing"/>
-    <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace"/>
-
-    <!-- Include some CSS rules I want to enforce -->
-    <rule ref="Squiz.CSS.ClassDefinitionClosingBraceSpace"/>
-    <rule ref="Squiz.CSS.ClassDefinitionNameSpacing"/>
-    <rule ref="Squiz.CSS.ClassDefinitionOpeningBraceSpace"/>
-    <rule ref="Squiz.CSS.ColourDefinition"/>
-    <rule ref="Squiz.CSS.DuplicateStyleDefinition"/>
-    <rule ref="Squiz.CSS.EmptyClassDefinition"/>
-    <rule ref="Squiz.CSS.Indentation"/>
-    <rule ref="Squiz.CSS.SemicolonSpacing"/>
-
+    <rule ref="PSR2.Classes.PropertyDeclaration.Underscore">
+        <type>error</type>
+    </rule>
 </ruleset>
